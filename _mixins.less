@@ -1,33 +1,4 @@
-<?php
-	$my_file = '_mixins.less';
-	$handle = fopen($my_file, 'w') or die('Cannot open file:  '.$my_file); //implicitly creates file
-	
-	print_r( $_POST );
-	print_r($_POST["var_name"]);
-	
-	/*
-	make string and new_color variable
-	loop through var_name and color_hex 
-	new_color = "@".var_name.":#".color_hex;
-	string .= new_color
-	move to next element in both arrays
-	*/
-	
-	//string of colors
-	$color_string = "";
-	
-	//size of array, both arrays should be same size
-	$arraySize = count($_POST["var_name"]);
-	
-	for($x=0; $x < $arraySize; $x++){
-	
-		//new color declaration
-		$new_color = "@".$_POST["var_name"][$x]." : #".$_POST["color_hex"][$x].";";
-		
-		$color_string .= $new_color."\n";
-	}
-	
-	$string = "/******************************************************************
+/******************************************************************
 Site Name: 
 Author: 
 
@@ -93,7 +64,9 @@ Need help w/ choosing your colors? Try this site out:http://0to255.com/
 @link-color:        @bones-pink;
 @link-hover:        darken(@link-color, 9%);
 
-$color_string
+@orange : #ff4e00;
+@darkslateblue : #2a3189;
+
 /*
 Here's a great tutorial on how to
 use color variables properly: http://sachagreif.com/sass-color-variables/
@@ -286,17 +259,4 @@ BUTTONS
 	&:active {
 		.css-gradient( darken(@bones-blue, 5%), @bones-blue );
 	}
-}";
-
-	
-	// Open the file to get existing content
-	$current = file_get_contents($my_file);
-	// Append a new person to the file
-	$current .= $string;
-	// Write the contents back to the file
-	file_put_contents($my_file, $current);
-	
-	
-	/* foreach ($_POST as $key => $value)
-		echo "field ".htmlspecialchars($key)." is ".htmlspecialchars($value)."<br>"; */
-?>
+}

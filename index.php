@@ -28,16 +28,32 @@
 					if(!($(".add_color").last().is(":visible"))) {
 						$(".add_color").last().show();
 					}
+					
 				});
 			}
 			
 			$(document).ready(function(){
 				addColor();
+				
+
+				$("#mixin-form").on("submit",function(e){
+					//each() var_name and color_hex to make sure all are filled, if not return; and error
+					
+					$.ajax({
+						type:'POST',
+						url:'mixin-file.php',
+						data: $(this).serialize(),
+						success: function(data){console.log("success="+data);},
+						error: function(){console.log("fuck");}
+					});
+					
+					e.preventDefault();
+				}); 
 			});
 		</script>
 	</head>
 	<body>
-		<form action="mixin-file.php" method="post" enctype="multipart/form-data"> 
+		<form id="mixin-form" enctype="multipart/form-data"> 
 			<!-- Colors -->
 			<div id="colors">
 				<span id="color_init" class="add_color">Add Color</span>
