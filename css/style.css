@@ -1,0 +1,32 @@
+body {
+	font-family:Arial, sans-serif;
+}
+
+#color_init {
+	background-color:orange;
+	width:100px;
+	height:25px;
+	color:#fff;
+	cursor:pointer;
+	display:block;
+	text-align:center;
+	line-height:25px;
+	margin-left:0;
+}
+
+.add_color,.remove_color {
+	width:15px;
+	height:15px;
+	border-radius:9px;
+	display:inline-block;
+	cursor:pointer;
+	margin-left:10px;
+}
+
+.add_color {
+	background-color:orange;
+}
+
+.remove_color {
+	background-color:blue;
+}
