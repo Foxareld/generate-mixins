@@ -5,7 +5,7 @@
 		<link href="css/style.css" rel="stylesheet" />
 		
 		<script>
-			var color_input = "<div class='color_input'><label for='var_name'>Variable Name</label><input type='text' name='var_name[]' /><label for='color_hex'>Color Hex</label><input type='text' name='color_hex[]' /><div class='add_color'></div><div class='remove_color'></div></div>";
+			var color_input = "<div class='color_input'><label for='var_name'>Variable Name</label><input type='text' class='var_name' name='var_name[]' /><label for='color_hex'>Color Hex</label><input class='color_hex' type='text' name='color_hex[]' /><div class='add_color'></div><div class='remove_color'></div></div>";
 			
 			function addColor() {
 				
@@ -39,14 +39,27 @@
 				$("#mixin-form").on("submit",function(e){
 					//each() var_name and color_hex to make sure all are filled, if not return; and error
 					
-					$.ajax({
-						type:'POST',
-						url:'mixin-file.php',
-						data: $(this).serialize(),
-						success: function(data){console.log("success="+data);},
-						error: function(){console.log("fuck");}
+					//check if any var_name or color_hex fields are blank
+					$(".var_name,.color_hex").each(function(){
+						if( !$(this).val() ) {
+							$(this).addClass("error");
+						} 
 					});
 					
+					//if there are no errors, run ajax
+					if( $(".error").length == 0 ){
+						$.ajax({
+							type:'POST',
+							url:'mixin-file.php',
+							data: $(this).serialize(),
+							success: function(data){
+								$("#msg").html("success=<br>"+data);
+							},
+							error: function(){
+								$("#msg").text("fuck");
+							}
+						});
+					}
 					e.preventDefault();
 				}); 
 			});
@@ -62,5 +75,6 @@
 			<br>
 			<input type="submit" value="Generate">	
 		</form>
+		<div id="msg"></div>
 	</body>
 </html>

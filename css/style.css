@@ -30,3 +30,7 @@ body {
 .remove_color {
 	background-color:blue;
 }
+
+.error {
+	border-color:red;
+}
