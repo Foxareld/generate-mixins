@@ -2,8 +2,8 @@
 	$my_file = '_mixins.less';
 	$handle = fopen($my_file, 'w') or die('Cannot open file:  '.$my_file); //implicitly creates file
 	
-	print_r( $_POST );
-	print_r($_POST["var_name"]);
+	//print_r( $_POST );
+	//print_r($_POST["var_name"]);
 	
 	/*
 	make string and new_color variable
@@ -12,6 +12,10 @@
 	string .= new_color
 	move to next element in both arrays
 	*/
+	
+	//return array for colors
+	$colorReturn = array();
+	$returnString = "";
 	
 	//string of colors
 	$color_string = "";
@@ -22,10 +26,20 @@
 	for($x=0; $x < $arraySize; $x++){
 	
 		//new color declaration
-		$new_color = "@".$_POST["var_name"][$x]." : #".$_POST["color_hex"][$x].";";
+		$new_color = "@".$_POST["var_name"][$x]." : #".$_POST["color_hex"][$x];
 		
-		$color_string .= $new_color."\n";
+		/* $color_array = array("var_name" => $_POST["var_name"][$x],"color_hex" => $_POST["color_hex"][$x]);
+		
+		array_push($colorReturn, $color_array); */
+		$returnString .= "<span style='color:#".$_POST["color_hex"][$x]."'>$new_color</span><br/>";
+		
+		$color_string .= $new_color.";\n";
 	}
+	
+	echo $returnString;
+	/* echo json_encode($colorReturn);
+	var_dump($colorReturn); */
+	
 	
 	$string = "/******************************************************************
 Site Name: 
